@@ -1,0 +1,86 @@
+apply plugin: 'com.android.application'
+apply from: rootProject.file('gradle/icontagger.gradle')
+apply from: rootProject.file('gradle/findbugs.gradle')
+apply from: rootProject.file('gradle/buildconfig.gradle')
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.innovattic:innolib-android:0.4.5'
+    compile 'com.jakewharton:butterknife:8.0.1'
+
+    def supportLibVersion = '23.3.0'
+    compile 'com.android.support:appcompat-v7:' + supportLibVersion
+
+    testCompile 'junit:junit:4.12'
+}
+
+// Build config variables
+def OPT_IS_DEBUG = 'IS_DEBUG'
+def OPT_IS_STORE = 'IS_STORE_RELEASE'
+def OPT_CALABASH = 'CALABASH'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId 'nl.jellow.wimalert'
+        minSdkVersion 18
+        targetSdkVersion 23
+        versionCode 1
+        versionName '1.0'
+
+        // Defines all default config variables, which may be overridden per build type
+        buildConfigField BOOLEAN, OPT_IS_DEBUG, TRUE
+        buildConfigField BOOLEAN, OPT_CALABASH, FALSE
+
+        // Build-type independent config variables
+        buildConfigField STRING, 'BUILD_TIME', '"' + new Date().format('yyyy-MM-dd HH:mm', TimeZone.getTimeZone('CET')) + '"'
+    }
+
+    signingConfigs {
+        // Generate keys with the following command:
+        // keytool -genkeypair -keystore app.keystore -alias debug -validity 10000 -dname "cn=YOUR_NAME_HERE, ou=Apps, o=Innovattic, l=Delft, s=Zuid-Holland, c=NL"
+        // You can skip unimportant parts, like ou (organizational unit) and s (state).
+
+        final String storePass = '8yZaDdL5E7mb87ZB'
+        final String debugPass = 'vR7A8DWB6SFcMLQs'
+        final String releasePass = 'xLJEEFkZdxS6Xthx'
+
+        debug {
+            storeFile file('app.keystore')
+            keyAlias 'debug'
+            storePassword storePass
+            keyPassword debugPass
+        }
+        release {
+            storeFile file('app.keystore')
+            keyAlias 'release'
+            storePassword storePass
+            keyPassword releasePass
+        }
+    }
+
+    buildTypes {
+
+        debug {
+            tagLauncherIconWith(debug)
+            applicationIdSuffix '.dbg'
+            versionNameSuffix '-dbg'
+
+            signingConfig signingConfigs.debug
+
+            buildConfigField BOOLEAN, OPT_IS_DEBUG, TRUE
+        }
+
+        release {
+            buildConfigField BOOLEAN, OPT_IS_STORE, TRUE
+
+            signingConfig signingConfigs.release
+
+            // run proguard
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}

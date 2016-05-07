@@ -1,0 +1,11 @@
+<?xml version=1.0 encoding=UTF-8?>
+<lint>
+	<!-- Disable the given check in this project -->
+	<issue id="ContentDescription" severity="ignore" />
+	<issue id="IconLocation" severity="ignore" />
+	<issue id="Overdraw" severity="ignore" />
+	<issue id="RtlEnabled" severity="ignore" />
+	<issue id="RtlHardcoded" severity="ignore" />
+	<issue id="RtlSymmetry" severity="ignore" />
+	<issue id="UseCompoundDrawables" severity="ignore" />
+</lint>

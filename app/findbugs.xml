@@ -1,0 +1,8 @@
+<FindBugsFilter>
+
+	<!-- Exclude generated resource files -->
+	<Match>
+		<Class name="~.*\.R\$.*" />
+	</Match>
+
+</FindBugsFilter>

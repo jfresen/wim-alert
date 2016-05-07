@@ -1,0 +1,12 @@
+apply plugin: 'findbugs'
+
+// FindBugs configuration
+// (does not work with Android projects out-of-the-box)
+task findbugs(type: FindBugs, dependsOn: 'compileDebugSources') {
+    ignoreFailures = true
+    classes = fileTree('build/intermediates/classes/debug/')
+    source = android.sourceSets.main.java.srcDirs
+    classpath = files()
+    effort = 'max'
+    excludeFilter = project.file('findbugs.xml')
+}

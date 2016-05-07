@@ -1,0 +1,8 @@
+
+ext {
+	// Define these as constants, to avoid typo's
+	BOOLEAN = "boolean"
+	STRING = "String"
+	FALSE = "false"
+	TRUE = "true"
+}
