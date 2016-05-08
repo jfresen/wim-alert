@@ -18,6 +18,19 @@
 	<string name="track_user_setting_text_nonempty">Tracking \'%1$s\'</string>
 	<string name="track_user_setting_text_empty">Not tracking anyone</string>
 
+	<string name="track_enabled_setting_title">Listen to WhatsApp</string>
+	<string name="track_enabled_setting_on">Listener enabled</string>
+	<string name="track_enabled_setting_off">Listener disabled</string>
+
+	<string name="settings_grant_access_title">Notifications Access</string>
+	<string name="settings_grant_access_text">For this app to work, it needs access to your
+		notifications. Click here to go to your phone\'s settings to grant access to this
+		app.</string>
+
+	<string name="settings_start_time_title">Start time</string>
+	<string name="settings_end_time_title">End time</string>
+	<string name="settings_time_format">%1$02d:%2$02d</string>
+
 	<string name="apply_name">Apply</string>
 
 	<string name="turn_alarm_on">Turn on alarm</string>

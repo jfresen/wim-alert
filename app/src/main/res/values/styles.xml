@@ -7,9 +7,22 @@
 	</style>
 
 	<style name="Settings.Wrapper">
-		<item name="android:padding">@dimen/margin_default</item>
 		<item name="android:orientation">vertical</item>
+		<item name="android:gravity">start|center_vertical</item>
+	</style>
+
+	<style name="Settings.Wrapper.Outer">
+		<item name="android:padding">@dimen/margin_default</item>
 		<item name="android:background">?attr/selectableItemBackground</item>
+	</style>
+
+	<style name="Settings.Wrapper.Outer.Horizontal">
+		<item name="android:orientation">horizontal</item>
+	</style>
+
+	<style name="Settings.Wrapper.Inner">
+		<item name="android:layout_width">0dp</item>
+		<item name="android:layout_weight">1</item>
 	</style>
 
 	<style name="Settings.Title">

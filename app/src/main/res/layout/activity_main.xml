@@ -16,11 +16,37 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />
 
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="@dimen/margin_default"
+			android:src="@drawable/img_alarm_light" />
+
 		<View style="@style/Divider" />
 
 		<LinearLayout
-			android:id="@+id/trackedUserSetting"
+			android:id="@+id/grantAccess"
 			style="@style/Settings.Wrapper">
+
+			<LinearLayout style="@style/Settings.Wrapper.Outer">
+
+				<TextView
+					style="@style/Settings.Title"
+					android:text="@string/settings_grant_access_title" />
+
+				<TextView
+					style="@style/Settings.Subtext"
+					android:text="@string/settings_grant_access_text" />
+
+			</LinearLayout>
+
+			<View style="@style/Divider" />
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:id="@+id/trackedUserSetting"
+			style="@style/Settings.Wrapper.Outer">
 
 			<TextView
 				style="@style/Settings.Title"
@@ -35,11 +61,64 @@
 
 		<View style="@style/Divider" />
 
-		<Button
-			android:id="@+id/applyNameButton"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="@string/apply_name" />
+		<LinearLayout
+			android:id="@+id/enableTracking"
+			style="@style/Settings.Wrapper.Outer.Horizontal">
+
+			<LinearLayout
+				style="@style/Settings.Wrapper.Inner">
+
+				<TextView
+					style="@style/Settings.Title"
+					android:text="@string/track_enabled_setting_title" />
+
+				<TextView
+					android:id="@+id/enableTrackingSubtext"
+					style="@style/Settings.Subtext" />
+
+			</LinearLayout>
+
+			<Switch
+				android:id="@+id/enableTrackingSwitch"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="@dimen/margin_default" />
+
+		</LinearLayout>
+
+		<View style="@style/Divider" />
+
+		<LinearLayout
+			android:id="@+id/startTimeSetting"
+			style="@style/Settings.Wrapper.Outer">
+
+			<TextView
+				style="@style/Settings.Title"
+				android:text="@string/settings_start_time_title" />
+
+			<TextView
+				android:id="@+id/startTimeSubtext"
+				style="@style/Settings.Subtext" />
+
+		</LinearLayout>
+
+		<View style="@style/Divider" />
+
+		<LinearLayout
+			android:id="@+id/endTimeSetting"
+			style="@style/Settings.Wrapper.Outer">
+
+			<TextView
+				style="@style/Settings.Title"
+				android:text="@string/settings_end_time_title" />
+
+			<TextView
+				android:id="@+id/endTimeSubtext"
+				style="@style/Settings.Subtext" />
+
+		</LinearLayout>
+
+		<View style="@style/Divider" />
 
 		<Button
 			android:id="@+id/turnAlarmOn"

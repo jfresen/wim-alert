@@ -4,13 +4,12 @@ import android.app.Notification;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.innovattic.lib.util.Prefs;
+import java.util.Calendar;
 
 import nl.jellow.wimalert.App;
 import nl.jellow.wimalert.ViewHierarchy;
@@ -22,18 +21,16 @@ public class NotificationListener extends NotificationListenerService {
 
 	private static final String TAG = NotificationListener.class.getSimpleName();
 
-	@Nullable
-	private String getTrackedUserName() {
-		return Prefs.get().getString(App.PREF_TRACKED_USER_NAME, null);
-	}
-
 	@Override
 	public void onNotificationPosted(final StatusBarNotification sbn) {
 		super.onNotificationPosted(sbn);
+		if (!isActive()) {
+			return;
+		}
 		if (!"com.whatsapp".equals(sbn.getPackageName())) {
 			return;
 		}
-		final String needle = getTrackedUserName();
+		final String needle = App.getTrackedUserName();
 		if (needle == null) {
 			return;
 		}
@@ -83,8 +80,30 @@ public class NotificationListener extends NotificationListenerService {
 		super.onNotificationRemoved(sbn);
 	}
 
+	private boolean isActive() {
+		if (!App.isTrackingEnabled()) {
+			return false;
+		}
+
+		final Calendar calendar = Calendar.getInstance();
+		final int currHour = calendar.get(Calendar.HOUR_OF_DAY);
+		final int currMinute = calendar.get(Calendar.MINUTE);
+		final int currTime = currHour * 60 + currMinute;
+
+		final int startTime = App.getStartTime();
+		final int endTime = App.getEndTime();
+
+		if (startTime == endTime) {
+			return true;
+		} else if (startTime < endTime) {
+			return startTime <= currTime && currTime <= endTime;
+		} else {
+			return startTime <= currTime || currTime <= endTime;
+		}
+	}
+
 	private void fireAlarm() {
-		Log.e(TAG, "ALARM ON!!!! " + getTrackedUserName() + " sent a message!");
+		Log.e(TAG, "ALARM ON!!!! " + App.getTrackedUserName() + " sent a message!");
 	}
 
 	private void turnOffAlarm() {
