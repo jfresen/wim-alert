@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<style name="Settings">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+	</style>
+
+	<style name="Settings.Wrapper">
+		<item name="android:padding">@dimen/margin_default</item>
+		<item name="android:orientation">vertical</item>
+		<item name="android:background">?attr/selectableItemBackground</item>
+	</style>
+
+	<style name="Settings.Title">
+		<item name="android:textAppearance">@style/App.TextAppearance.Settings.Title</item>
+		<item name="android:maxLines">1</item>
+	</style>
+
+	<style name="Settings.Subtext">
+		<item name="android:textAppearance">@style/App.TextAppearance.Settings.Subtext</item>
+	</style>
+
+	<style name="Divider">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">@dimen/divider_size</item>
+		<item name="android:background">@color/divider_color</item>
+	</style>
+
+	<style name="App.TextAppearance.Settings.Title" parent="TextAppearance.AppCompat.Body2">
+		<item name="android:textSize">16sp</item>
+	</style>
+
+	<style name="App.TextAppearance.Settings.Subtext" parent="TextAppearance.AppCompat.Caption">
+		<item name="android:textSize">14sp</item>
+	</style>
+
+	<style name="App.TextAppearance.TextInputLayout.Hint" parent="@style/TextAppearance.Design.Hint">
+		<item name="android:textColor">?android:attr/textColorHint</item>
+	</style>
+
+</resources>

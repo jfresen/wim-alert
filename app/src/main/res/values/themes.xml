@@ -9,6 +9,15 @@
 		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 		<item name="colorAccent">@color/colorAccent</item>
 
+		<!-- Dialogs -->
+		<item name="alertDialogTheme">@style/Theme.App.AlertDialog</item>
+	</style>
+
+	<style name="Theme.App.AlertDialog" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
+		<!-- Apply color palette to AlertDialogs -->
+		<item name="colorPrimary">@color/colorPrimary</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+		<item name="colorAccent">@color/colorAccent</item>
 	</style>
 
 </resources>

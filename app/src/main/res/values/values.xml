@@ -5,4 +5,10 @@
 	<color name="colorPrimaryDark">#303F9F</color>
 	<color name="colorAccent">#FF4081</color>
 
+	<color name="divider_color">#dcdcdc</color>
+	<dimen name="divider_size">1dp</dimen>
+
+	<dimen name="margin_default">16dp</dimen>
+	<dimen name="margin_default_half">8dp</dimen>
+
 </resources>

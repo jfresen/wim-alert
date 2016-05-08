@@ -2,5 +2,31 @@
 <resources>
 
 	<string name="app_name">Wim Alert</string>
+	<string name="notification_listener_service_label">Wim-notifications listener</string>
+
+	<string name="label_ok">OK</string>
+	<string name="label_cancel">Cancel</string>
+	<string name="label_done">Done</string>
+	<string name="label_yes">Yes</string>
+	<string name="label_no">No</string>
+	<string name="label_error">Error</string>
+
+	<string name="track_user_dialog_title">User to track</string>
+	<string name="track_user_dialog_hint">WhatsApp name</string>
+
+	<string name="track_user_setting_title">User to track</string>
+	<string name="track_user_setting_text_nonempty">Tracking \'%1$s\'</string>
+	<string name="track_user_setting_text_empty">Not tracking anyone</string>
+
+	<string name="apply_name">Apply</string>
+
+	<string name="turn_alarm_on">Turn on alarm</string>
+	<string name="turn_alarm_off">Turn off alarm</string>
+
+	<string name="alarm_arm_title">Arm alarm</string>
+	<string name="alarm_arm_description">Monitor WhatsApp notifications and trigger the alarm when a message from %1$s is received</string>
+
+	<string name="alarm_arm_time_start">Auto arm from</string>
+	<string name="alarm_arm_time_end">Auto arm till</string>
 
 </resources>
