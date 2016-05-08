@@ -7,12 +7,14 @@ import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.innovattic.lib.android.BaseAppCompatActivity;
+import com.innovattic.lib.util.Debug;
 import com.innovattic.lib.util.Mutable;
 import com.innovattic.lib.util.Prefs;
 
@@ -39,8 +41,12 @@ public class MainActivity extends BaseAppCompatActivity {
 		fillTrackedUserSubtext();
 	}
 
+	private String getTrackedUserName() {
+		return Prefs.get().getString(App.PREF_TRACKED_USER_NAME, null);
+	}
+
 	private void fillTrackedUserSubtext() {
-		final String trackedUser = Prefs.get().getString(App.PREF_TRACKED_USER_NAME, null);
+		final String trackedUser = getTrackedUserName();
 		if (!TextUtils.isEmpty(trackedUser)) {
 			final String text = getString(R.string.track_user_setting_text_nonempty, trackedUser);
 			mTrackedUserSubtext.setText(text);
@@ -92,11 +98,21 @@ public class MainActivity extends BaseAppCompatActivity {
 		});
 		final AlertDialog dialog = builder.create();
 
-		// Inflate the TextInputLayout in which the user can enter the password
+		// Inflate the TextInputLayout in which the username can be entered
+		final String trackedUserName = getTrackedUserName();
 		final LayoutInflater inflater = dialog.getLayoutInflater();
 		@SuppressLint("InflateParams")
 		final View content = inflater.inflate(R.layout.dialog_input, null);
 		inputField.value = (EditText) content.findViewById(R.id.input_text);
+		inputField.value.setText(trackedUserName);
+		inputField.value.setSelection(trackedUserName == null ? 0 : trackedUserName.length());
+		inputField.value.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+			@Override
+			public boolean onEditorAction(final TextView v, final int actionId, final KeyEvent event) {
+				dialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
+				return true;
+			}
+		});
 
 		dialog.setView(content);
 		dialog.show();
