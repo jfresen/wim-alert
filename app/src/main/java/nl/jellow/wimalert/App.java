@@ -1,16 +1,17 @@
 package nl.jellow.wimalert;
 
+import android.app.Application;
 import android.content.Context;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.innovattic.lib.android.BaseApp;
-import com.innovattic.lib.util.Prefs;
+import nl.jellow.wimalert.util.Prefs;
 
 /**
  * Created by Jelle on 7-5-2016.
  */
-public class App extends BaseApp {
+public class App extends Application {
 
 	private static final String TAG = App.class.getSimpleName();
 
@@ -19,10 +20,18 @@ public class App extends BaseApp {
 	public static final String PREF_START_TIME = "start-tracking-time";
 	public static final String PREF_END_TIME = "end-tracking-time";
 
+	private static Context mApplicationContext;
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		mApplicationContext = getApplicationContext();
 		Prefs.init(this, Context.MODE_PRIVATE);
+	}
+
+	@NonNull
+	public static Context getContext() {
+		return mApplicationContext;
 	}
 
 	public static String getTrackedUserName() {

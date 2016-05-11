@@ -15,22 +15,6 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-
-        maven {
-            url 'https://maven.innovattic.com/content/repositories/com.innovattic.android.snapshots'
-            credentials {
-                username innovatticMavenUser
-                password innovatticMavenPassword
-            }
-        }
-
-        maven {
-            url 'https://maven.innovattic.com/content/repositories/com.innovattic.android.releases'
-            credentials {
-                username innovatticMavenUser
-                password innovatticMavenPassword
-            }
-        }
     }
 }
 

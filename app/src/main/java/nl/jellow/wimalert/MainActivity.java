@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
@@ -21,11 +22,6 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.innovattic.lib.android.BaseAppCompatActivity;
-import com.innovattic.lib.util.Mutable;
-import com.innovattic.lib.util.Prefs;
-import com.innovattic.lib.util.Views;
-
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -34,8 +30,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
+import nl.jellow.wimalert.util.Dialogs;
+import nl.jellow.wimalert.util.Mutable;
+import nl.jellow.wimalert.util.Prefs;
 
-public class MainActivity extends BaseAppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
 	private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -83,7 +82,10 @@ public class MainActivity extends BaseAppCompatActivity {
 	}
 
 	private void showHideGrantAccess() {
-		Views.showView(mGrantAccess, !App.isNotificationAccessGranted());
+		if (mGrantAccess != null) {
+			final boolean granted = App.isNotificationAccessGranted();
+			mGrantAccess.setVisibility(granted ? View.GONE : View.VISIBLE);
+		}
 	}
 
 	private void fillTrackedUserSubtext() {

@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.Calendar;
 
 import nl.jellow.wimalert.App;
-import nl.jellow.wimalert.ViewHierarchy;
+import nl.jellow.wimalert.util.ViewHierarchy;
 
 /**
  * Created by Jelle on 7-5-2016.

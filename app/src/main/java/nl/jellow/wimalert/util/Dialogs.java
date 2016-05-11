@@ -1,4 +1,4 @@
-package nl.jellow.wimalert;
+package nl.jellow.wimalert.util;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -7,13 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.widget.TimePicker;
-
-import com.innovattic.lib.util.Prefs;
-
-import java.util.Locale;
 
 /**
  * Created by Jelle on 12-1-2016.
