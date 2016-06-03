@@ -16,6 +16,7 @@ public class App extends Application {
 	private static final String TAG = App.class.getSimpleName();
 
 	public static final String PREF_TRACKED_USER_NAME = "tracked-user";
+	public static final String PREF_REGEX_TRIGGER = "regex-trigger";
 	public static final String PREF_TRACKING_ENABLED = "tracking-enabled";
 	public static final String PREF_START_TIME = "start-tracking-time";
 	public static final String PREF_END_TIME = "end-tracking-time";
@@ -36,6 +37,10 @@ public class App extends Application {
 
 	public static String getTrackedUserName() {
 		return Prefs.get().getString(PREF_TRACKED_USER_NAME, null);
+	}
+
+	public static String getRegexTrigger() {
+		return Prefs.get().getString(PREF_REGEX_TRIGGER, null);
 	}
 
 	public static boolean isTrackingEnabled() {

@@ -45,23 +45,6 @@
 		</LinearLayout>
 
 		<LinearLayout
-			android:id="@+id/trackedUserSetting"
-			style="@style/Settings.Wrapper.Outer">
-
-			<TextView
-				style="@style/Settings.Title"
-				android:text="@string/track_user_setting_title" />
-
-			<TextView
-				android:id="@+id/trackedUserSubtext"
-				style="@style/Settings.Subtext"
-				android:text="@string/track_user_setting_text_empty" />
-
-		</LinearLayout>
-
-		<View style="@style/Divider" />
-
-		<LinearLayout
 			android:id="@+id/enableTracking"
 			style="@style/Settings.Wrapper.Outer.Horizontal">
 
@@ -83,6 +66,40 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginLeft="@dimen/margin_default" />
+
+		</LinearLayout>
+
+		<View style="@style/Divider" />
+
+		<LinearLayout
+			android:id="@+id/trackedUserSetting"
+			style="@style/Settings.Wrapper.Outer">
+
+			<TextView
+				style="@style/Settings.Title"
+				android:text="@string/track_user_setting_title" />
+
+			<TextView
+				android:id="@+id/trackedUserSubtext"
+				style="@style/Settings.Subtext"
+				android:text="@string/track_user_setting_text_empty" />
+
+		</LinearLayout>
+
+		<View style="@style/Divider" />
+
+		<LinearLayout
+			android:id="@+id/regex"
+			style="@style/Settings.Wrapper.Outer">
+
+			<TextView
+				style="@style/Settings.Title"
+				android:text="@string/track_regex_title" />
+
+			<TextView
+				android:id="@+id/regexSubtext"
+				style="@style/Settings.Subtext"
+				android:text="@string/track_regex_text_empty" />
 
 		</LinearLayout>
 

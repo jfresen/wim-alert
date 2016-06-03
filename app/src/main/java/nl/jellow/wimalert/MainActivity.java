@@ -44,13 +44,16 @@ public class MainActivity extends AppCompatActivity {
 	@Bind(R.id.grantAccess)
 	protected ViewGroup mGrantAccess;
 
-	@Bind(R.id.trackedUserSubtext)
-	protected TextView mTrackedUserSubtext;
-
 	@Bind(R.id.enableTrackingSubtext)
 	protected TextView mTrackingEnabledSubtext;
 	@Bind(R.id.enableTrackingSwitch)
 	protected Switch mTrackingEnabledSwitch;
+
+	@Bind(R.id.trackedUserSubtext)
+	protected TextView mTrackedUserSubtext;
+
+	@Bind(R.id.regexSubtext)
+	protected TextView mRegexSubtext;
 
 	@Bind(R.id.startTimeSubtext)
 	protected TextView mStartTimeSubtext;
@@ -68,8 +71,9 @@ public class MainActivity extends AppCompatActivity {
 		ButterKnife.bind(this);
 
 		mBuildtime.setText(BuildConfig.BUILD_TIME);
-		fillTrackedUserSubtext();
 		fillTrackingEnabledSubtext();
+		fillTrackedUserSubtext();
+		fillRegexSubtext();
 		mTrackingEnabledSwitch.setChecked(App.isTrackingEnabled());
 		fillStartTimeSubtext();
 		fillEndTimeSubtext();
@@ -95,6 +99,16 @@ public class MainActivity extends AppCompatActivity {
 			mTrackedUserSubtext.setText(text);
 		} else {
 			mTrackedUserSubtext.setText(R.string.track_user_setting_text_empty);
+		}
+	}
+
+	private void fillRegexSubtext() {
+		final String regex = App.getRegexTrigger();
+		if (!TextUtils.isEmpty(regex)) {
+			final String text = getString(R.string.track_regex_text_nonempty, regex);
+			mRegexSubtext.setText(text);
+		} else {
+			mRegexSubtext.setText(R.string.track_regex_text_empty);
 		}
 	}
 
@@ -157,6 +171,10 @@ public class MainActivity extends AppCompatActivity {
 			intentAction = "android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS";
 		}
 		startActivity(new Intent(intentAction));
+	}
+
+	@OnClick(R.id.regex)
+	protected void onRegexClicked() {
 	}
 
 	@OnClick(R.id.startTimeSetting)

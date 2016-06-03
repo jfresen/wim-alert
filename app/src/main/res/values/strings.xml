@@ -18,6 +18,10 @@
 	<string name="track_user_setting_text_nonempty">Tracking \'%1$s\'</string>
 	<string name="track_user_setting_text_empty">Not tracking anyone</string>
 
+	<string name="track_regex_title">Regex trigger</string>
+	<string name="track_regex_text_nonempty">%1$s</string>
+	<string name="track_regex_text_empty">Triggered by everything</string>
+
 	<string name="track_enabled_setting_title">Listen to WhatsApp</string>
 	<string name="track_enabled_setting_on">Listener enabled</string>
 	<string name="track_enabled_setting_off">Listener disabled</string>
