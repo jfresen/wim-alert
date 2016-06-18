@@ -1,6 +1,5 @@
 package nl.jellow.wimalert;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,10 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -31,7 +29,6 @@ import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import nl.jellow.wimalert.util.Dialogs;
-import nl.jellow.wimalert.util.Mutable;
 import nl.jellow.wimalert.util.Prefs;
 
 public class MainActivity extends AppCompatActivity {
@@ -214,40 +211,7 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void showTrackedUserDialog() {
-		final Mutable<EditText> inputField = new Mutable<>(null);
-		// Create the dialog
-		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(R.string.track_user_dialog_title);
-		builder.setNegativeButton(R.string.label_cancel, Dialogs.DISMISS_ON_CLICK);
-		builder.setPositiveButton(R.string.label_ok, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(final DialogInterface dialog, final int which) {
-				final Editable text = inputField.value.getText();
-				setTrackedUserName(text);
-				fillTrackedUserSubtext();
-				dialog.dismiss();
-			}
-		});
-		final AlertDialog dialog = builder.create();
-
-		// Inflate the TextInputLayout in which the username can be entered
-		final String trackedUserName = App.getTrackedUserName();
-		final LayoutInflater inflater = dialog.getLayoutInflater();
-		@SuppressLint("InflateParams")
-		final View content = inflater.inflate(R.layout.dialog_input, null);
-		inputField.value = (EditText) content.findViewById(R.id.input_text);
-		inputField.value.setText(trackedUserName);
-		inputField.value.setSelection(trackedUserName == null ? 0 : trackedUserName.length());
-		inputField.value.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-			@Override
-			public boolean onEditorAction(final TextView v, final int actionId, final KeyEvent event) {
-				dialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
-				return true;
-			}
-		});
-
-		dialog.setView(content);
-		dialog.show();
+		new EnterUserNameDialog().show(getSupportFragmentManager(), "username-dialog");
 	}
 
 	private Calendar getUtcCalendar(final long millis) {
@@ -272,6 +236,29 @@ public class MainActivity extends AppCompatActivity {
 	@OnClick(R.id.turnAlarmOff)
 	protected void onTurnAlarmOffClicked() {
 		Log.e(TAG, "Turning alarm off");
+	}
+
+	public static class EnterUserNameDialog extends Dialogs.TextInputDialog {
+		@Override
+		public void configureDialog(final AlertDialog.Builder builder) {
+			builder.setTitle(R.string.track_user_dialog_title);
+		}
+
+		@Override
+		public void configureEditText(final EditText editText) {
+			final CharSequence title = getText(R.string.track_user_setting_title);
+			editText.setContentDescription(title);
+			editText.setHint(title);
+			editText.setInputType(EditorInfo.TYPE_CLASS_TEXT |
+					EditorInfo.TYPE_TEXT_VARIATION_PERSON_NAME);
+			editText.setText(App.getTrackedUserName());
+		}
+
+		@Override
+		public void onPositiveButtonClicked(final Editable text) {
+			getMainActivity().setTrackedUserName(text);
+			getMainActivity().fillTrackedUserSubtext();
+		}
 	}
 
 }
