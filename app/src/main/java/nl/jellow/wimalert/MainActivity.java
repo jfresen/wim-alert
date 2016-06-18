@@ -138,6 +138,17 @@ public class MainActivity extends AppCompatActivity {
 		Prefs.get().setString(App.PREF_TRACKED_USER_NAME, trackedUser);
 	}
 
+	private void setRegexTrigger(final CharSequence regex) {
+		if (TextUtils.isEmpty(regex)) {
+			Log.v(TAG, "Resetting regex");
+			Prefs.get().remove(App.PREF_REGEX_TRIGGER);
+			return;
+		}
+		final String regexString = regex.toString();
+		Log.v(TAG, "Setting regular expression to '" + regexString + "'");
+		Prefs.get().setString(App.PREF_REGEX_TRIGGER, regexString);
+	}
+
 	private void setTrackingEnabled(final boolean enabled) {
 		Log.v(TAG, (enabled ? "En" : "Dis") + "abling tracking");
 		Prefs.get().setBoolean(App.PREF_TRACKING_ENABLED, enabled);
@@ -172,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
 
 	@OnClick(R.id.regex)
 	protected void onRegexClicked() {
+		showRegexDialog();
 	}
 
 	@OnClick(R.id.startTimeSetting)
@@ -212,6 +224,10 @@ public class MainActivity extends AppCompatActivity {
 
 	private void showTrackedUserDialog() {
 		new EnterUserNameDialog().show(getSupportFragmentManager(), "username-dialog");
+	}
+
+	private void showRegexDialog() {
+		new EnterRegexDialog().show(getSupportFragmentManager(), "regex-dialog");
 	}
 
 	private Calendar getUtcCalendar(final long millis) {
@@ -259,6 +275,30 @@ public class MainActivity extends AppCompatActivity {
 			getMainActivity().setTrackedUserName(text);
 			getMainActivity().fillTrackedUserSubtext();
 		}
+	}
+
+	public static class EnterRegexDialog extends Dialogs.TextInputDialog {
+
+		@Override
+		public void configureDialog(final AlertDialog.Builder builder) {
+			builder.setTitle(R.string.track_regex_title);
+		}
+
+		@Override
+		public void configureEditText(final EditText editText) {
+			final CharSequence title = getText(R.string.track_regex_title);
+			editText.setContentDescription(title);
+			editText.setHint(title);
+			editText.setInputType(EditorInfo.TYPE_CLASS_TEXT);
+			editText.setText(App.getRegexTrigger());
+		}
+
+		@Override
+		public void onPositiveButtonClicked(final Editable text) {
+			getMainActivity().setRegexTrigger(text);
+			getMainActivity().fillRegexSubtext();
+		}
+
 	}
 
 }
