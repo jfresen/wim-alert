@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 
 import nl.jellow.wimalert.App;
 import nl.jellow.wimalert.R;
+import nl.jellow.wimalert.net.Api;
 import nl.jellow.wimalert.util.ViewHierarchy;
 
 /**
@@ -180,10 +181,12 @@ public class NotificationListener extends NotificationListenerService {
 
 	private void fireAlarm() {
 		Log.e(TAG, "ALARM ON!!!! " + App.getTrackedUserName() + " sent a message!");
+		Api.Send("on");
 	}
 
 	private void turnOffAlarm() {
 		Log.i(TAG, "ALARM OFF");
+		Api.Send("off");
 	}
 
 }

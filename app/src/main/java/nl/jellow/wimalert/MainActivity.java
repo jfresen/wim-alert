@@ -28,6 +28,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
+import nl.jellow.wimalert.net.Api;
 import nl.jellow.wimalert.util.Dialogs;
 import nl.jellow.wimalert.util.Prefs;
 
@@ -247,11 +248,13 @@ public class MainActivity extends AppCompatActivity {
 	@OnClick(R.id.turnAlarmOn)
 	protected void onTurnAlarmOnClicked() {
 		Log.e(TAG, "Turning alarm on");
+		Api.Send("on");
 	}
 
 	@OnClick(R.id.turnAlarmOff)
 	protected void onTurnAlarmOffClicked() {
 		Log.e(TAG, "Turning alarm off");
+		Api.Send("off");
 	}
 
 	public static class EnterUserNameDialog extends Dialogs.TextInputDialog {
