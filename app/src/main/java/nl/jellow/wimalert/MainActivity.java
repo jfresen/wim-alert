@@ -170,6 +170,10 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
+	@OnClick(R.id.setupButton)
+	protected void onSetupClicked() {
+	}
+
 	@OnClick(R.id.trackedUserSetting)
 	protected void onTrackedUserSettingClicked() {
 		showTrackedUserDialog();

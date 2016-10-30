@@ -27,6 +27,7 @@
 	<string name="track_enabled_setting_on">Listener enabled</string>
 	<string name="track_enabled_setting_off">Listener disabled</string>
 
+	<string name="settings_setup_button">Setup Light</string>
 	<string name="settings_grant_access_title">Notifications Access</string>
 	<string name="settings_grant_access_text">For this app to work, it needs access to your
 		notifications. Click here to go to your phone\'s settings to grant access to this

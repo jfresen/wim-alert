@@ -22,6 +22,12 @@
 			android:layout_margin="@dimen/margin_default"
 			android:src="@drawable/img_alarm_light" />
 
+		<Button
+			android:id="@+id/setupButton"
+			style="@style/App.Button"
+			android:layout_marginBottom="@dimen/margin_default"
+			android:text="@string/settings_setup_button" />
+
 		<View style="@style/Divider" />
 
 		<LinearLayout
