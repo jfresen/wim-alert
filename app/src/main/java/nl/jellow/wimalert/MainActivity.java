@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 		ButterKnife.bind(this);
 
-		mBuildtime.setText(BuildConfig.BUILD_TIME);
+		mBuildtime.setText(getString(R.string.buildtime, BuildConfig.BUILD_TIME));
 		fillTrackingEnabledSubtext();
 		fillTrackedUserSubtext();
 		fillRegexSubtext();

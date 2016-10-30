@@ -36,7 +36,7 @@ android {
         buildConfigField BOOLEAN, OPT_CALABASH, FALSE
 
         // Build-type independent config variables
-        buildConfigField STRING, 'BUILD_TIME', '"' + new Date().format('yyyy-MM-dd HH:mm', TimeZone.getTimeZone('CET')) + '"'
+        buildConfigField STRING, 'BUILD_TIME', '"' + new Date().format('yyyy-MM-dd HH:mm:ss', TimeZone.getTimeZone('CET')) + '"'
     }
 
     signingConfigs {
