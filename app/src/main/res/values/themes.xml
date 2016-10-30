@@ -9,6 +9,11 @@
 		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 		<item name="colorAccent">@color/colorAccent</item>
 
+		<!-- Buttons -->
+		<item name="buttonStyle">@style/App.Button</item>
+		<item name="colorButtonNormal">?attr/colorPrimary</item>
+		<item name="android:textAppearanceButton">@style/TextAppearance.AppCompat.Widget.Button.Inverse</item>
+
 		<!-- Dialogs -->
 		<item name="alertDialogTheme">@style/Theme.App.AlertDialog</item>
 	</style>
