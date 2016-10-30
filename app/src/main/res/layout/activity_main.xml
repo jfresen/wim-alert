@@ -137,22 +137,24 @@
 
 		<View style="@style/Divider" />
 
-		<Button
-			android:id="@+id/turnAlarmOn"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="@string/turn_alarm_on" />
-
-		<Button
-			android:id="@+id/turnAlarmOff"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="@string/turn_alarm_off" />
-
-		<FrameLayout
-			android:id="@+id/fragmentContainer"
+		<LinearLayout
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content" />
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<Button
+				android:id="@+id/turnAlarmOn"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/turn_alarm_on" />
+
+			<Button
+				android:id="@+id/turnAlarmOff"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/turn_alarm_off" />
+
+		</LinearLayout>
 
 	</LinearLayout>
 
