@@ -144,6 +144,22 @@
 		<View style="@style/Divider" />
 
 		<LinearLayout
+			android:id="@+id/webAddressSetting"
+			style="@style/Settings.Wrapper.Outer">
+
+			<TextView
+				style="@style/Settings.Title"
+				android:text="@string/settings_web_address" />
+
+			<TextView
+				android:id="@+id/webAddressSubtext"
+				style="@style/Settings.Subtext" />
+
+		</LinearLayout>
+
+		<View style="@style/Divider" />
+
+		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:orientation="horizontal">
@@ -161,12 +177,6 @@
 				android:text="@string/turn_alarm_off" />
 
 		</LinearLayout>
-
-		<Button
-			android:id="@+id/setIpAddressButton"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="Set IP address" />
 
 	</LinearLayout>
 

@@ -20,7 +20,7 @@ public class App extends Application {
 	public static final String PREF_TRACKING_ENABLED = "tracking-enabled";
 	public static final String PREF_START_TIME = "start-tracking-time";
 	public static final String PREF_END_TIME = "end-tracking-time";
-	public static final String PREF_IP_ADDRESS = "ip-address";
+	public static final String PREF_ALARM_WEB_ADDRESS = "web-address";
 
 	private static Context mApplicationContext;
 
@@ -65,8 +65,8 @@ public class App extends Application {
 		return Prefs.get().getInt(PREF_END_TIME, 0);
 	}
 
-	public static String getIpAddress() {
-		return Prefs.get().getString(PREF_IP_ADDRESS, "192.168.1.60");
+	public static String getWebAddress() {
+		return Prefs.get().getString(PREF_ALARM_WEB_ADDRESS, null);
 	}
 
 }

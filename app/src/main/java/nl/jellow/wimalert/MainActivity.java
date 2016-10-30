@@ -13,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -60,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
 	@Bind(R.id.endTimeSubtext)
 	protected TextView mEndTimeSubtext;
 
+	@Bind(R.id.webAddressSubtext)
+	protected TextView mWebAddressSubtext;
+
 	private Handler mHandler;
 
 	@Override
@@ -76,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
 		mTrackingEnabledSwitch.setChecked(App.isTrackingEnabled());
 		fillStartTimeSubtext();
 		fillEndTimeSubtext();
+		fillWebAddressSubtext();
 	}
 
 	@Override
@@ -129,6 +132,15 @@ public class MainActivity extends AppCompatActivity {
 		mEndTimeSubtext.setText(formatTimeStamp(end));
 	}
 
+	private void fillWebAddressSubtext() {
+		final String webAddress = App.getWebAddress();
+		if (!TextUtils.isEmpty(webAddress)) {
+			mWebAddressSubtext.setText(webAddress);
+		} else {
+			mWebAddressSubtext.setText(R.string.settings_web_address_empty);
+		}
+	}
+
 	private void setTrackedUserName(final CharSequence userName) {
 		if (TextUtils.isEmpty(userName)) {
 			Log.v(TAG, "Resetting tracked user");
@@ -156,18 +168,15 @@ public class MainActivity extends AppCompatActivity {
 		Prefs.get().setBoolean(App.PREF_TRACKING_ENABLED, enabled);
 	}
 
-	private boolean setIpAddress(final CharSequence ipAddress) {
-		if (TextUtils.isEmpty(ipAddress)) {
-			return false;
+	private void setWebAddress(final CharSequence webAddress) {
+		if (TextUtils.isEmpty(webAddress)) {
+			Log.v(TAG, "Resetting web address");
+			Prefs.get().remove(App.PREF_ALARM_WEB_ADDRESS);
+			return;
 		}
-		final String ipAddressString = ipAddress.toString();
-		if (Patterns.IP_ADDRESS.matcher(ipAddress).matches()) {
-			Log.v(TAG, "Setting ip address to " + ipAddressString);
-			Prefs.get().setString(App.PREF_IP_ADDRESS, ipAddressString);
-			return true;
-		} else {
-			return false;
-		}
+		final String webAddressString = webAddress.toString();
+		Log.v(TAG, "Setting web address to " + webAddressString);
+		Prefs.get().setString(App.PREF_ALARM_WEB_ADDRESS, webAddressString);
 	}
 
 	@OnClick(R.id.setupButton)
@@ -276,10 +285,10 @@ public class MainActivity extends AppCompatActivity {
 		Api.Send("off");
 	}
 
-	@OnClick(R.id.setIpAddressButton)
+	@OnClick(R.id.webAddressSetting)
 	protected void onSetIpAddressClicked() {
 		Log.i(TAG, "Setting IP address...");
-		new EnterIpAddressDialog().show(getSupportFragmentManager(), "ip-address-dialog");
+		new EnterWebAddressDialog().show(getSupportFragmentManager(), "ip-address-dialog");
 	}
 
 	public static class EnterUserNameDialog extends Dialogs.TextInputDialog {
@@ -329,28 +338,27 @@ public class MainActivity extends AppCompatActivity {
 
 	}
 
-	public static class EnterIpAddressDialog extends Dialogs.TextInputDialog {
+	public static class EnterWebAddressDialog extends Dialogs.TextInputDialog {
 
 		@Override
 		public void configureDialog(final AlertDialog.Builder builder) {
-			builder.setTitle(R.string.track_regex_title);
+			builder.setTitle(R.string.settings_web_address);
 		}
 
 		@Override
 		public void configureEditText(final EditText editText) {
-			final CharSequence title = "IP address"/*getText(R.string.track_regex_title)*/;
-			editText.setContentDescription("Content description (een verhaaltje ofzo?)");
-			editText.setHint("e.g. 192.168.1.52");
-			editText.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
-			editText.setText(App.getIpAddress());
+			final CharSequence title = getText(R.string.settings_web_address_title);
+			editText.setContentDescription(title);
+			editText.setHint(R.string.settings_web_address_hint);
+			editText.setInputType(EditorInfo.TYPE_CLASS_TEXT |
+					EditorInfo.TYPE_TEXT_VARIATION_URI);
+			editText.setText(App.getWebAddress());
 		}
 
 		@Override
 		public void onPositiveButtonClicked(final Editable text) {
-			if (!getMainActivity().setIpAddress(text)) {
-				Log.e(TAG, "IP address not valid");
-			}
-//			getMainActivity().fillRegexSubtext();
+			getMainActivity().setWebAddress(text);
+			getMainActivity().fillWebAddressSubtext();
 		}
 
 	}

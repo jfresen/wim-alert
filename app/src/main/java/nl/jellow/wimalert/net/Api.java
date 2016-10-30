@@ -21,9 +21,9 @@ public class Api {
 	private static final String TAG = Api.class.getSimpleName();
 
 	public static void Send(final String endpoint) {
-		final String ip = App.getIpAddress();
+		final String ip = App.getWebAddress();
 		if (TextUtils.isEmpty(ip)) {
-			Log.w(TAG, "IP address of the lamp is not known");
+			Log.w(TAG, "URL of the lamp is not set");
 		}
 		final String url = String.format("http://%1$s/%2$s", ip, endpoint);
 		final OkHttpClient client = new OkHttpClient();

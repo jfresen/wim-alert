@@ -37,6 +37,11 @@
 	<string name="settings_end_time_title">End time</string>
 	<string name="settings_time_format">%1$02d:%2$02d</string>
 
+	<string name="settings_web_address">Alarm light\'s web address</string>
+	<string name="settings_web_address_empty">Web address not set</string>
+	<string name="settings_web_address_title">Web address</string>
+	<string name="settings_web_address_hint">e.g. 192.168.1.52</string>
+
 	<string name="apply_name">Apply</string>
 
 	<string name="turn_alarm_on">Turn on alarm</string>
