@@ -34,7 +34,7 @@ import nl.jellow.wimalert.util.Prefs;
 
 public class MainActivity extends AppCompatActivity {
 
-	private static final String TAG = MainActivity.class.getSimpleName();
+	private static final String TAG = App.TAG;
 
 	@Bind(R.id.buildtime)
 	protected TextView mBuildtime;

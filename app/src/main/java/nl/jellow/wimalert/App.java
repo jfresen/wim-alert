@@ -13,7 +13,7 @@ import nl.jellow.wimalert.util.Prefs;
  */
 public class App extends Application {
 
-	private static final String TAG = App.class.getSimpleName();
+	public static final String TAG = "wimalert";
 
 	public static final String PREF_TRACKED_USER_NAME = "tracked-user";
 	public static final String PREF_REGEX_TRIGGER = "regex-trigger";

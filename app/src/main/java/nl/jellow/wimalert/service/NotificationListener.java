@@ -23,7 +23,7 @@ import nl.jellow.wimalert.util.ViewHierarchy;
  */
 public class NotificationListener extends NotificationListenerService {
 
-	private static final String TAG = NotificationListener.class.getSimpleName();
+	private static final String TAG = App.TAG;
 
 	private Pattern mRegex;
 

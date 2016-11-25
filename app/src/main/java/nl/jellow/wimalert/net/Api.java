@@ -18,7 +18,7 @@ import okhttp3.Response;
 
 public class Api {
 
-	private static final String TAG = Api.class.getSimpleName();
+	private static final String TAG = App.TAG;
 
 	public static void Send(final String endpoint) {
 		final String ip = App.getWebAddress();
