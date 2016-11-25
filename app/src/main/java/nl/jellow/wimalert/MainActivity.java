@@ -276,13 +276,13 @@ public class MainActivity extends AppCompatActivity {
 	@OnClick(R.id.turnAlarmOn)
 	protected void onTurnAlarmOnClicked() {
 		Log.e(TAG, "Turning alarm on");
-		Api.Send("on");
+		Api.send("on");
 	}
 
 	@OnClick(R.id.turnAlarmOff)
 	protected void onTurnAlarmOffClicked() {
 		Log.e(TAG, "Turning alarm off");
-		Api.Send("off");
+		Api.send("off");
 	}
 
 	@OnClick(R.id.webAddressSetting)

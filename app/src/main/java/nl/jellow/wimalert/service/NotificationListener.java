@@ -181,12 +181,12 @@ public class NotificationListener extends NotificationListenerService {
 
 	private void fireAlarm() {
 		Log.e(TAG, "ALARM ON!!!! " + App.getTrackedUserName() + " sent a message!");
-		Api.Send("on");
+		Api.send("on");
 	}
 
 	private void turnOffAlarm() {
 		Log.i(TAG, "ALARM OFF");
-		Api.Send("off");
+		Api.send("off");
 	}
 
 }
