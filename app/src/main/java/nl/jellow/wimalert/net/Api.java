@@ -61,4 +61,11 @@ public class Api {
 		return Base64.encode(unescapedData, Base64.NO_PADDING | Base64.NO_WRAP);
 	}
 
+	public static byte[] combine(final byte[] iv, final byte[] ciphertext) {
+		final byte[] combined = new byte[iv.length + ciphertext.length];
+		System.arraycopy(iv, 0, combined, 0, iv.length);
+		System.arraycopy(ciphertext, 0, combined, iv.length, ciphertext.length);
+		return combined;
+	}
+
 }
