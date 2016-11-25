@@ -20,16 +20,26 @@ public class Api {
 
 	private static final String TAG = App.TAG;
 
-	public static void Send(final String endpoint) {
+	public interface RequestBuilderConfigurator {
+		Request.Builder configure(Request.Builder builder);
+	}
+
+	public static void send(final String endpoint) {
+		send(endpoint, null);
+	}
+
+	public static void send(final String endpoint, final RequestBuilderConfigurator configurator) {
 		final String ip = App.getWebAddress();
 		if (TextUtils.isEmpty(ip)) {
 			Log.w(TAG, "URL of the lamp is not set");
 		}
 		final String url = String.format("http://%1$s/%2$s", ip, endpoint);
 		final OkHttpClient client = new OkHttpClient();
-		final Request request = new Request.Builder()
-				.url(url)
-				.build();
+		Request.Builder builder = new Request.Builder().url(url);
+		if (configurator != null) {
+			builder = configurator.configure(builder);
+		}
+		final Request request = builder.build();
 		client.newCall(request).enqueue(new Callback() {
 			@Override
 			public void onFailure(Call call, IOException e) {
