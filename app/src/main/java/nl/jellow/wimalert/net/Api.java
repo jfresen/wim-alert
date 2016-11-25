@@ -1,6 +1,7 @@
 package nl.jellow.wimalert.net;
 
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 
 import java.io.IOException;
@@ -50,6 +51,14 @@ public class Api {
 				Log.v(TAG, "Successfully made call to " + url);
 			}
 		});
+	}
+
+	public static byte[] base64(final String str) {
+		return base64(str.getBytes());
+	}
+
+	public static byte[] base64(final byte[] unescapedData) {
+		return Base64.encode(unescapedData, Base64.NO_PADDING | Base64.NO_WRAP);
 	}
 
 }
