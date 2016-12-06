@@ -29,6 +29,7 @@ import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import nl.jellow.wimalert.net.Api;
+import nl.jellow.wimalert.net.ChooseWifiDialog;
 import nl.jellow.wimalert.util.Dialogs;
 import nl.jellow.wimalert.util.Prefs;
 
@@ -181,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
 
 	@OnClick(R.id.setupButton)
 	protected void onSetupClicked() {
+		new ChooseWifiDialog().show(getSupportFragmentManager(), "choose-espnetwork-dialog");
 	}
 
 	@OnClick(R.id.trackedUserSetting)
