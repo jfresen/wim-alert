@@ -53,4 +53,5 @@
 	<string name="alarm_arm_time_start">Auto arm from</string>
 	<string name="alarm_arm_time_end">Auto arm till</string>
 
+	<string name="setup_scanning">Scanning…</string>
 </resources>
