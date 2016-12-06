@@ -5,11 +5,14 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -20,6 +23,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import nl.jellow.wimalert.MainActivity;
 import nl.jellow.wimalert.R;
 
@@ -140,6 +145,52 @@ public class Dialogs {
 			return dialog;
 		}
 
+	}
+
+	public static abstract class ListDialogFragment<VH extends RecyclerView.ViewHolder> extends DialogFragment {
+
+		@Bind(R.id.recyclerview)
+		protected RecyclerView mRecyclerView;
+
+		protected void configureDialog(final AlertDialog.Builder builder) {
+		}
+
+		@LayoutRes
+		protected int getDialogLayout() {
+			return R.layout.dialog_list;
+		}
+
+		protected abstract RecyclerView.Adapter<VH> onCreateAdapter();
+
+		@NonNull
+		@Override
+		public Dialog onCreateDialog(final Bundle savedInstanceState) {
+			final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+			builder.setNegativeButton(R.string.label_cancel, Dialogs.DISMISS_ON_CLICK);
+			builder.setPositiveButton(R.string.label_ok, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(final DialogInterface dialog, final int which) {
+					dialog.dismiss();
+				}
+			});
+			configureDialog(builder);
+			final AlertDialog dialog = builder.create();
+
+			// Inflate the TextInputLayout in which the username can be entered
+			final LayoutInflater inflater = dialog.getLayoutInflater();
+			@SuppressLint("InflateParams")
+			final View content = inflater.inflate(getDialogLayout(), null);
+			ButterKnife.bind(this, content);
+
+			final LinearLayoutManager llm = new LinearLayoutManager(getContext(),
+					LinearLayoutManager.VERTICAL, false);
+			mRecyclerView.setLayoutManager(llm);
+			mRecyclerView.setAdapter(onCreateAdapter());
+
+			dialog.setView(content);
+
+			return dialog;
+		}
 	}
 
 }
